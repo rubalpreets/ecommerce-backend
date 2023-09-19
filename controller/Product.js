@@ -20,7 +20,12 @@ exports.fetchAllProducts = async (req, res) => {
   // TODO - Try with multiple categories
   // TODO - sort via discounted price not actual price
 
-  let query = Product.find({});
+  let condition = {};
+  if (!req.query.admin) {
+    condition.deleted = { $ne: true };
+  }
+
+  let query = Product.find(condition);
   if (req.query.category) {
     query = query.find({ category: req.query.category });
   }
