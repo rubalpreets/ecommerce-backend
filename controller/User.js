@@ -1,7 +1,7 @@
 const { User } = require("../model/User");
 
 exports.fetchUserByID = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.user;
   const query = User.findById(id);
   try {
     const user = await query.exec();
